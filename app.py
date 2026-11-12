@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 def home():
-    return send_file(os.path.join(BASE_DIR, "index.html"))
+    return send_file(os.path.join(BASE_DIR, "templates", "Templates", "index.html"))
 
 @app.route("/admin")
 def admin():
