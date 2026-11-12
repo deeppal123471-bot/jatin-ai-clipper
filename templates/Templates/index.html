@@ -1,15 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JATIN AI CLIPPER</title>
-
 <style>
-* {
-    box-sizing: border-box;
-}
-
+* { box-sizing: border-box; }
 body {
     margin: 0;
     padding: 20px;
@@ -17,7 +14,6 @@ body {
     color: white;
     font-family: Arial, sans-serif;
 }
-
 .container {
     max-width: 600px;
     margin: 40px auto;
@@ -26,24 +22,20 @@ body {
     border: 1px solid #333;
     border-radius: 18px;
 }
-
 h1 {
     text-align: center;
     color: #ff3030;
     font-size: 30px;
 }
-
 .subtitle {
     text-align: center;
     color: #aaa;
     margin-bottom: 30px;
 }
-
 label {
     display: block;
     margin: 18px 0 8px;
 }
-
 input, select {
     width: 100%;
     padding: 14px;
@@ -53,7 +45,6 @@ input, select {
     border-radius: 8px;
     font-size: 15px;
 }
-
 button {
     width: 100%;
     padding: 15px;
@@ -64,8 +55,8 @@ button {
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
 }
-
 .note {
     margin-top: 25px;
     color: #999;
@@ -74,47 +65,44 @@ button {
 }
 </style>
 </head>
-
 <body>
 <div class="container">
-
 <h1>JATIN AI CLIPPER</h1>
+<p class="subtitle">Turn Long Videos Into Shorts</p>
 
-<p class="subtitle">
-Turn Long Videos Into Shorts
-</p>
-
+<form action="/generate" method="POST">
 <label>YouTube Video Link</label>
-<input type="url" placeholder="Paste your video link here">
+<input type="url" name="video_url"
+placeholder="Paste your video link here" required>
 
 <label>Number of Clips</label>
-<select>
-<option>1 Clip</option>
-<option>5 Clips</option>
-<option>10 Clips</option>
-<option>15 Clips</option>
-<option>20 Clips</option>
-<option>25 Clips</option>
-<option>30 Clips</option>
+<select name="clip_count">
+<option value="1">1 Clip</option>
+<option value="5">5 Clips</option>
+<option value="10">10 Clips</option>
+<option value="15">15 Clips</option>
+<option value="20">20 Clips</option>
+<option value="25">25 Clips</option>
+<option value="30">30 Clips</option>
 </select>
 
 <label>Clip Duration</label>
-<select>
-<option>About 1 Minute</option>
+<select name="duration">
+<option value="60">About 1 Minute</option>
 </select>
 
 <label>Subtitles</label>
-<select>
-<option>English Subtitles</option>
+<select name="subtitles">
+<option value="english">English Subtitles</option>
 </select>
 
-<button type="button">GENERATE CLIPS</button>
+<button type="submit">GENERATE CLIPS</button>
+</form>
 
 <p class="note">
 Access approval required. Only process videos you own
 or have permission to use.
 </p>
-
 </div>
 </body>
 </html>
