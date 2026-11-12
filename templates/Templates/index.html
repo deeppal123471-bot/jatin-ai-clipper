@@ -63,17 +63,32 @@ button {
     font-size: 13px;
     text-align: center;
 }
+.or {
+    text-align: center;
+    color: #ff3030;
+    margin: 18px;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
 <div class="container">
+
 <h1>JATIN AI CLIPPER</h1>
 <p class="subtitle">Turn Long Videos Into Shorts</p>
 
-<form action="/generate" method="POST">
+<form action="/generate" method="POST"
+enctype="multipart/form-data" id="clipForm">
+
 <label>YouTube Video Link</label>
 <input type="url" name="video_url"
-placeholder="Paste your video link here" required>
+id="video_url" placeholder="Paste your video link here">
+
+<div class="or">— OR —</div>
+
+<label>Upload Your Video (MP4)</label>
+<input type="file" name="video_file"
+id="video_file" accept="video/mp4">
 
 <label>Number of Clips</label>
 <select name="clip_count">
@@ -100,9 +115,27 @@ placeholder="Paste your video link here" required>
 </form>
 
 <p class="note">
-Access approval required. Only process videos you own
-or have permission to use.
+Use only videos you own or have permission to process.
 </p>
+
 </div>
+
+<script>
+document.getElementById("clipForm").addEventListener("submit", function(e) {
+    const link = document.getElementById("video_url").value.trim();
+    const file = document.getElementById("video_file").files.length;
+
+    if (!link && !file) {
+        e.preventDefault();
+        alert("Please paste a YouTube link or upload an MP4 video.");
+    }
+
+    if (link && file) {
+        e.preventDefault();
+        alert("Please use either a YouTube link OR an uploaded video.");
+    }
+});
+</script>
+
 </body>
 </html>
