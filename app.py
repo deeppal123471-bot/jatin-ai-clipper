@@ -13,17 +13,23 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
 
+
 @app.route("/")
 def home():
-    return send_file(os.path.join(BASE_DIR, "templates", "Templates", "index.html"))
+    return send_file(
+        os.path.join(BASE_DIR, "templates", "Templates", "index.html")
+    )
+
 
 @app.route("/admin")
 def admin():
     return send_file(os.path.join(BASE_DIR, "admin.html"))
 
+
 @app.route("/health")
 def health():
     return "JATIN AI CLIPPER is running!"
+
 
 @app.route("/generate", methods=["POST"])
 def generate():
@@ -42,6 +48,7 @@ def generate():
     if video_url:
         if not video_url.startswith(("https://", "http://")):
             return "Please enter a valid video URL.", 400
+
         source_message = "Video link received successfully."
 
     else:
@@ -64,28 +71,28 @@ def generate():
     <title>JATIN AI CLIPPER</title>
     <style>
     body {
-        background:#080808;
-        color:white;
-        font-family:Arial;
-        text-align:center;
-        padding:30px;
+        background: #080808;
+        color: white;
+        font-family: Arial;
+        text-align: center;
+        padding: 30px;
     }
     .box {
-        background:#151515;
-        padding:25px;
-        border-radius:15px;
-        max-width:500px;
-        margin:40px auto;
+        background: #151515;
+        padding: 25px;
+        border-radius: 15px;
+        max-width: 500px;
+        margin: 40px auto;
     }
-    h2 { color:#ff3030; }
-    p { color:#ccc; line-height:1.6; }
-    a { color:#ff5555; }
+    h2 { color: #ff3030; }
+    p { color: #ccc; line-height: 1.6; }
+    a { color: #ff5555; }
     </style>
     </head>
     <body>
     <div class="box">
     <h2>Request Received!</h2>
-    <p>{{ source }}</p>
+    <p>{{ video_status }}</p>
     <p>Requested clips: {{ count }}</p>
     <p>Duration: {{ duration }} seconds</p>
     <p>Subtitles: {{ subtitles }}</p>
@@ -94,12 +101,17 @@ def generate():
     </div>
     </body>
     </html>
-    """, source=source_message, count=clip_count,
-         duration=duration, subtitles=subtitles)
+    """,
+    video_status=source_message,
+    count=clip_count,
+    duration=duration,
+    subtitles=subtitles)
+
 
 @app.errorhandler(413)
 def file_too_large(error):
     return "Video is too large. Maximum upload size is 100 MB.", 413
+
 
 if __name__ == "__main__":
     app.run()
