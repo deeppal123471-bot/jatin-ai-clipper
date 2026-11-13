@@ -2,3 +2,4 @@ Flask
 gunicorn
 imageio-ffmpeg
 yt-dlp
+moviepy
